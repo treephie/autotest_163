@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<info>
+    <url>http://mail.163.com</url>
+    <normal username="phlearningtest" password="phtest">正常登录</normal>
+    <null username="" password="">请输入帐号</null>
+    <pwd_null username="phlearningtest" password="">请输入密码</pwd_null>
+    <user_null username="" password="123456">请输入帐号</user_null>
+    <error username="error" password="error">帐号或密码错误</error>
+</info>
