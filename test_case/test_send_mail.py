@@ -1,5 +1,7 @@
 # coding: utf-8
-
+"""
+测试发送邮件
+"""
 import unittest
 from selenium import webdriver
 from test_case.public import login
@@ -20,6 +22,7 @@ class TestSendMail(unittest.TestCase):
         self.driver.implicitly_wait(10)
         self.base_url = root.getElementsByTagName('url')[0].firstChild.data
 
+    # 只输入收信人发送
     def test_send1(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -40,7 +43,7 @@ class TestSendMail(unittest.TestCase):
         # 退出
         login.logout(self)
 
-
+    # 输入收信人、主题、正文、附件发送
     def test_send2(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -54,7 +57,13 @@ class TestSendMail(unittest.TestCase):
         driver.find_element_by_xpath("//div[@id='dvNavTop']/ul/li[2]").click()
         driver.find_element_by_css_selector("input.nui-editableAddr-ipt").send_keys('838927564@qq.com')
         driver.find_element_by_xpath("//input[@class='nui-ipt-input' and @maxlength='256']").send_keys(u'自动发送的主题')
-        driver.find_element_by_xpath("//body[@class='nui-scroll']").send_keys(u'自动发送的内容，啊哈哈哈哈哈')
+
+        frame = driver.find_element_by_css_selector("iframe.APP-editor-iframe")
+        driver.switch_to.frame(frame)
+        driver.find_element_by_xpath("//body[@class='nui-scroll']").send_keys(u'自动发送的正文内容，啊哈哈哈哈哈')
+        driver.switch_to.default_content()
+
+        driver.find_element_by_xpath("//input[@type='file']").send_keys("F:\\attach.txt")
         driver.find_element_by_xpath("//header[@class='frame-main-cont-head']//span[@class='nui-btn-text']").click()
         sleep(3)
         text = driver.find_element_by_class_name("tK1").text

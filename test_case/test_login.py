@@ -1,5 +1,7 @@
 # coding: utf-8
-
+"""
+测试登录的各种异常情况
+"""
 import unittest
 from selenium import webdriver
 from test_case.public import login
@@ -18,6 +20,7 @@ class TestLogin(unittest.TestCase):
         self.driver.implicitly_wait(20)
         self.base_url = root.getElementsByTagName('url')[0].firstChild.data
 
+    # 输入用户名和密码为空
     def test_null(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -32,6 +35,7 @@ class TestLogin(unittest.TestCase):
         text = driver.find_element_by_css_selector('.ferrorhead').text
         self.assertEqual(text, error_msg)
 
+    # 输入用户名、密码为空
     def test_pwd_null(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -46,6 +50,7 @@ class TestLogin(unittest.TestCase):
         text = driver.find_element_by_css_selector('.ferrorhead').text
         self.assertEqual(text, error_msg)
 
+    # 输入用户名为空、密码
     def test_user_null(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -60,6 +65,7 @@ class TestLogin(unittest.TestCase):
         text = driver.find_element_by_css_selector('.ferrorhead').text
         self.assertEqual(text, error_msg)
 
+    # 输入用户名和密码错误
     def test_error(self):
         driver = self.driver
         driver.get(self.base_url)
