@@ -15,6 +15,7 @@ root = dom.documentElement
 
 
 class TestDelete(unittest.TestCase):
+    u"""测试删除邮件"""
     def setUp(self):
         options = self.driver = webdriver.ChromeOptions()
         options.add_experimental_option("prefs", {"credentials_enable_service": False, "profile.password_manager_enabled": False})
@@ -24,6 +25,7 @@ class TestDelete(unittest.TestCase):
 
     # 删除
     def test_delete(self):
+        u"""删除邮件"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)

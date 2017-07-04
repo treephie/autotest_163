@@ -15,6 +15,7 @@ root = dom.documentElement
 
 
 class TestSendMail(unittest.TestCase):
+    u"""测试发送邮件"""
     def setUp(self):
         options = self.driver = webdriver.ChromeOptions()
         options.add_experimental_option("prefs", {"credentials_enable_service": False, "profile.password_manager_enabled": False})
@@ -22,8 +23,8 @@ class TestSendMail(unittest.TestCase):
         self.driver.implicitly_wait(10)
         self.base_url = root.getElementsByTagName('url')[0].firstChild.data
 
-    # 只输入收信人发送
     def test_send1(self):
+        u"""只输入收信人发送"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)
@@ -43,8 +44,8 @@ class TestSendMail(unittest.TestCase):
         # 退出
         login.logout(self)
 
-    # 输入收信人、主题、正文、附件发送
     def test_send2(self):
+        u"""输入收信人、主题、正文、附件发送"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)

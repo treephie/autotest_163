@@ -16,6 +16,7 @@ root = dom.documentElement
 
 
 class TestSearch(unittest.TestCase):
+    u"""测试搜索邮件"""
     def setUp(self):
         options = self.driver = webdriver.ChromeOptions()
         options.add_experimental_option("prefs", {"credentials_enable_service": False, "profile.password_manager_enabled": False})
@@ -25,6 +26,7 @@ class TestSearch(unittest.TestCase):
 
     # 搜索
     def test_search(self):
+        u"""搜索邮件"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)

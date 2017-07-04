@@ -15,13 +15,14 @@ root = dom.documentElement
 
 
 class TestLogin(unittest.TestCase):
+    u"""测试登录模块"""
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(20)
         self.base_url = root.getElementsByTagName('url')[0].firstChild.data
 
-    # 输入用户名和密码为空
     def test_null(self):
+        u"""输入用户名和密码均为空"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)
@@ -35,8 +36,8 @@ class TestLogin(unittest.TestCase):
         text = driver.find_element_by_css_selector('.ferrorhead').text
         self.assertEqual(text, error_msg)
 
-    # 输入用户名、密码为空
     def test_pwd_null(self):
+        u"""输入用户名、密码为空"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)
@@ -50,8 +51,8 @@ class TestLogin(unittest.TestCase):
         text = driver.find_element_by_css_selector('.ferrorhead').text
         self.assertEqual(text, error_msg)
 
-    # 输入用户名为空、密码
     def test_user_null(self):
+        u"""输入用户名为空、密码"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)
@@ -65,8 +66,8 @@ class TestLogin(unittest.TestCase):
         text = driver.find_element_by_css_selector('.ferrorhead').text
         self.assertEqual(text, error_msg)
 
-    # 输入用户名和密码错误
     def test_error(self):
+        u"""输入用户名和密码错误"""
         driver = self.driver
         driver.get(self.base_url)
         sleep(3)

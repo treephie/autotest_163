@@ -1,47 +1,39 @@
 # coding=utf-8
 import smtplib
 from email.mime.text import MIMEText
-import os, time
+import time
 
 
-# =============定义发送邮件==========
-def send_mail(file_new):
-    # 发信邮箱
-    mail_from='phlearningtest@163.com'
-    # 收信邮箱
-    mail_to='838927564@qq.com'
-    # 定义正文
-    f = open(file_new, 'rb')
-    mail_body = f.read()
-    f.close()
+class Mail:
+    """
+    邮件类，提供发送邮件的方法
+    """
 
-    msg = MIMEText(mail_body, 'html', 'utf-8')
-    msg['from'] = mail_from
-    msg['to'] = mail_to
-    msg['Subject'] = u"自动化测试报告"
-    # 定义发送时间（不定义的可能有的邮件客户端会不显示发送时间）
-    msg['date'] = time.strftime('%a, %d %b %Y %H:%M:%S %z')
-    smtp = smtplib.SMTP()
-    # 连接 SMTP 服务器，此处用的 163 的 SMTP 服务器
-    smtp.connect('smtp.163.com')
-    # 用户名密码
-    smtp.login('phlearningtest@163.com', 'phtest001')
-    smtp.sendmail(mail_from, mail_to, msg.as_string())
-    smtp.quit()
-    print 'email has send out !'
+    def __init__(self, mail_from, mail_to, mail_subject, mail_attach):
+        self.mail_from = mail_from
+        self.mail_to = mail_to
+        self.mail_subject = mail_subject
+        self.mail_attach = mail_attach
+        f = open(mail_attach, 'rb')
+        self.mail_body = f.read()
+        f.close()
 
+    def send_mail(self):
 
-# ======查找测试报告目录，找到最新生成的测试报告文件====《Selenium2 Python 自动化测试实战》
-def send_report(test_report):
-    result_dir = test_report
-    lists = os.listdir(result_dir)
-    lists.sort()
-    # 找到最新生成的文件
-    file_new = os.path.join(result_dir, lists[-1])
-    print file_new
-    # 调用发邮件模块
-    send_mail(file_new)
+        msg = MIMEText(self.mail_body, 'html', 'utf-8')
+        msg['from'] = self.mail_from
+        msg['to'] = self.mail_to
+        msg['Subject'] = self.mail_subject
+        msg['date'] = time.strftime('%a, %d %b %Y %H:%M:%S %z')
+
+        smtp = smtplib.SMTP()
+        smtp.connect('smtp.163.com')
+        smtp.login('phlearningtest@163.com', 'phtest001')
+        # print self.mail_from, self.mail_to, msg.as_string()
+        smtp.sendmail(self.mail_from, self.mail_to, msg.as_string())
+        smtp.quit()
+        print 'email has send out !'
 
 
 if __name__ == '__main__':
-    send_report(u'F:/学习/web自动化：Python+Selenium/实战-163邮箱/autotest_163/report')
+    Mail('phlearningtest@163.com', '838927564@qq.com', u'163邮箱测试报告', u'F:/学习/web自动化：Python+Selenium/实战-163邮箱/autotest_163/report/report1499138546.63.html').send_mail()
