@@ -1,8 +1,18 @@
 # coding: utf-8
+
+import sys
+import os
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+# print "rootpath::::::", rootPath
+sys.path.append(rootPath)
+
+
 import unittest
 import HTMLTestRunner
 import time, os
 from mail import Mail
+
 
 
 def get_report(file_dir):
