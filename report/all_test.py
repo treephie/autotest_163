@@ -39,5 +39,5 @@ if __name__ == '__main__':
     runner.run(suite)
     fp.close()
 
-    report = get_report(u'F:/学习/web自动化：Python+Selenium/实战-163邮箱/autotest_163/report/')
+    report = get_report('./')
     Mail.Mail('phlearningtest@163.com', '838927564@qq.com', u'163邮箱测试报告', report).send_mail()
